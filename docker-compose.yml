@@ -1,13 +1,13 @@
 version: '3.1'
 services:
 
-  StatService:
+  ewm-stats:
     build: StatService/
-    image: stats
+    image: ewm-stats
     ports:
       - "9090:9090"
     depends_on:
-      - main-db
+      - ewm-db
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/StatsDB
       - DB_NAME=StatsDB
@@ -23,14 +23,14 @@ services:
       - POSTGRES_USER=maxim
       - POSTGRES_PASSWORD=root
 
-  MainService:
+  ewm-service:
     build: MainService/
-    image: main
+    image: ewm-server
     ports:
       - "8080:8080"
     depends_on:
-      - StatService
-      - main-db
+      - ewm-stats
+      - ewm-db
     environment:
       - MAIN_SERVICE_URL=http://StatService:9090
       - SPRING_DATASOURCE_URL=jdbc:postgresql://main-db:5432/MainDB
@@ -38,7 +38,7 @@ services:
       - POSTGRES_USER=maxim
       - POSTGRES_PASSWORD=root
 
-  main-db:
+  ewm-db:
     image: postgres:14-alpine
     ports:
       - "6541:5432"
