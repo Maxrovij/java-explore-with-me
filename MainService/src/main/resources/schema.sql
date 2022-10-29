@@ -49,7 +49,7 @@ CREATE TABLE IF NOT EXISTS requests
     CONSTRAINT pk_request PRIMARY KEY (id),
     UNIQUE (requester_id, event_id),
     CONSTRAINT REQUESTER FOREIGN KEY (requester_id) REFERENCES users (id),
-    CONSTRAINT EVENT FOREIGN KEY (event_id) REFERENCES events (id)
+    CONSTRAINT EVENT_FK FOREIGN KEY (event_id) REFERENCES events (id)
 );
 
 CREATE TABLE IF NOT EXISTS compilations
