@@ -1,15 +1,48 @@
 version: '3.1'
 services:
-  stats-server:
+
+  StatService:
+    build: StatService/
+    image: stats
     ports:
       - "9090:9090"
+    depends_on:
+      - main-db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/StatsDB
+      - DB_NAME=StatsDB
+      - POSTGRES_USER=maxim
+      - POSTGRES_PASSWORD=root
 
   stats-db:
     image: postgres:14-alpine
+    ports:
+      - "6542:5432"
+    environment:
+      - POSTGRES_DB=StatsDB
+      - POSTGRES_USER=maxim
+      - POSTGRES_PASSWORD=root
 
-  ewm-service:
+  MainService:
+    build: MainService/
+    image: main
     ports:
       - "8080:8080"
+    depends_on:
+      - StatService
+      - main-db
+    environment:
+      - MAIN_SERVICE_URL=http://StatService:9090
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://main-db:5432/MainDB
+      - DB_NAME=MainDB
+      - POSTGRES_USER=maxim
+      - POSTGRES_PASSWORD=root
 
-  ewm-db:
+  main-db:
     image: postgres:14-alpine
+    ports:
+      - "6541:5432"
+    environment:
+      - POSTGRES_DB=MainDB
+      - POSTGRES_USER=maxim
+      - POSTGRES_PASSWORD=root
