@@ -1,6 +1,5 @@
 package explorewithme.compilation.model;
 
-import explorewithme.event.model.EventShortDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
