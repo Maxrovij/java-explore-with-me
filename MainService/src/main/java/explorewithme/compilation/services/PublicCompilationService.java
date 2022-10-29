@@ -19,6 +19,7 @@ public class PublicCompilationService {
     private final CompilationRepository repository;
     private final PageCreator<CompilationDto> pageCreator;
     private final CompilationMapper mapper;
+
     public List<CompilationDto> getAll(boolean pinned, int from, int size) {
         List<Compilation> found = repository.findAllByPinned(pinned);
         return pageCreator

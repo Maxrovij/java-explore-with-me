@@ -19,8 +19,8 @@ public class PrivateEventController {
 
     @GetMapping("/events")
     public List<EventShortDto> getAllByUserId(@PathVariable Long userId,
-                                      @Valid @PositiveOrZero @RequestParam(defaultValue = "0") int from,
-                                      @Valid @Positive @RequestParam(defaultValue = "10") int size) {
+                                              @Valid @PositiveOrZero @RequestParam(defaultValue = "0") int from,
+                                              @Valid @Positive @RequestParam(defaultValue = "10") int size) {
         return service.getAllByUserId(userId, from, size);
     }
 
@@ -38,7 +38,7 @@ public class PrivateEventController {
 
     @GetMapping("/events/{eventId}")
     public EventFullDto getByEventId(@PathVariable Long userId,
-                        @PathVariable Long eventId) {
+                                     @PathVariable Long eventId) {
         return service.getByEventId(userId, eventId);
     }
 

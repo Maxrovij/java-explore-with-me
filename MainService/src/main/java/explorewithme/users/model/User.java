@@ -26,7 +26,7 @@ public class User {
     public boolean equals(Object o) {
         if (o == null) return false;
         if (this == o) return true;
-        if(this.getClass() != o.getClass()) return false;
+        if (this.getClass() != o.getClass()) return false;
         User user = (User) o;
         return id != null && Objects.equals(id, user.id);
     }

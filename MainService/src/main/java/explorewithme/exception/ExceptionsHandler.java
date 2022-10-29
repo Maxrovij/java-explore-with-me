@@ -1,6 +1,5 @@
 package explorewithme.exception;
 
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -21,7 +20,7 @@ public class ExceptionsHandler {
                 "Object not found",
                 e.getMessage(),
                 LocalDateTime.now()
-                );
+        );
     }
 
     @ExceptionHandler
@@ -38,7 +37,7 @@ public class ExceptionsHandler {
 
     @ExceptionHandler
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ApiError handleOperationForbiddenException(final OperationForbiddenException e) {
+    public ApiError handleOperationForbiddenException(OperationForbiddenException e) {
         return new ApiError(
                 HttpStatus.CONFLICT,
                 List.of(),

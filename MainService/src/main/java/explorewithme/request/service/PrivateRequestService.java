@@ -52,10 +52,11 @@ public class PrivateRequestService {
         if (event.isRequestModeration()) {
             request = repository.save(new Request(userId, eventId, RequestStatus.PENDING));
         } else {
-            request = repository.save(new Request(userId, eventId ,RequestStatus.CONFIRMED));
+            request = repository.save(new Request(userId, eventId, RequestStatus.CONFIRMED));
         }
         return mapper.map(request);
     }
+
     @Transactional
     public ParticipantRequestDto cancel(Long userId, Long requestId) {
         checkUserId(userId);
@@ -103,11 +104,13 @@ public class PrivateRequestService {
         }
         return optionalRequest.get();
     }
+
     private Long checkUserId(Long userId) {
         if (!userRepository.existsById(userId))
             throw new EntityNotFoundException("User not found");
         else return userId;
     }
+
     private Event getEventById(Long eventId) {
         Optional<Event> mayBeEvent = eventRepository.findById(eventId);
         if (mayBeEvent.isEmpty())
