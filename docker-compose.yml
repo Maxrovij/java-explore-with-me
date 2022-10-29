@@ -8,11 +8,12 @@ services:
       - "9090:9090"
     depends_on:
       - ewm-db
+      - stats-db
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://stats-db:5432/StatsDB
       - DB_NAME=StatsDB
       - POSTGRES_USER=maxim
-      - POSTGRES_PASSWORD=root
+      - POSTGRES_PASSWORD=iamroot
 
   stats-db:
     image: postgres:14-alpine
@@ -21,7 +22,7 @@ services:
     environment:
       - POSTGRES_DB=StatsDB
       - POSTGRES_USER=maxim
-      - POSTGRES_PASSWORD=root
+      - POSTGRES_PASSWORD=iamroot
 
   ewm-service:
     build: MainService/
@@ -36,7 +37,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://main-db:5432/MainDB
       - DB_NAME=MainDB
       - POSTGRES_USER=maxim
-      - POSTGRES_PASSWORD=root
+      - POSTGRES_PASSWORD=iamroot
 
   ewm-db:
     image: postgres:14-alpine
@@ -45,4 +46,4 @@ services:
     environment:
       - POSTGRES_DB=MainDB
       - POSTGRES_USER=maxim
-      - POSTGRES_PASSWORD=root
+      - POSTGRES_PASSWORD=iamroot
