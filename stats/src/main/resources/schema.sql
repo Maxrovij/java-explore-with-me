@@ -4,5 +4,5 @@ CREATE TABLE IF NOT EXISTS stats
     app      VARCHAR   NOT NULL,
     uri      VARCHAR   NOT NULL,
     ip       VARCHAR   NOT NULL,
-    time     TIMESTAMP NOT NULL
+    timestamp     TIMESTAMP NOT NULL
 );

@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -21,5 +22,5 @@ public class EndpointHit {
     private String app;
     private String uri;
     private String ip;
-    private String time;
+    private LocalDateTime timestamp;
 }

@@ -12,11 +12,11 @@ public interface StatsRepository extends JpaRepository<EndpointHit, Long> {
 
     Integer countByUri(String uri);
 
-    @Query(value = "select app as app, uri as uri, count(app) as hits from stats " +
-            "where time > ?1 and time < ?2 group by app, uri", nativeQuery = true)
+    @Query(value = "select new ru.practicum.explorewithme.stats.ViewStats(e.app, e.uri, count(e.app)) " +
+            "from EndpointHit e where e.timestamp > ?1 and  e.timestamp <?2 group by e.app, e.uri")
     List<ViewStats> getNotUniqueViews(LocalDateTime start, LocalDateTime end);
 
-    @Query(value = "select  app as app, uri as uri, count(app) as hits from stats " +
-            "where time > ?1 and time < ?2 group by app, uri, ip", nativeQuery = true)
+    @Query(value = "select new ru.practicum.explorewithme.stats.ViewStats(e.app, e.uri, count(e.app)) " +
+            "from EndpointHit e where e.timestamp > ?1 and  e.timestamp <?2 group by e.app, e.uri, e.ip")
     List<ViewStats> getUniqueViews(LocalDateTime start, LocalDateTime end);
 }

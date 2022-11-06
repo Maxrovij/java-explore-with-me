@@ -45,7 +45,7 @@ public class StatsService {
         endpointHit.setApp(hitDto.getApp());
         endpointHit.setUri(hitDto.getUri());
         endpointHit.setIp(hitDto.getIp());
-        endpointHit.setTime(hitDto.getHitTime().toString());
+        endpointHit.setTimestamp(hitDto.getTimestamp());
         return endpointHit;
     }
 }

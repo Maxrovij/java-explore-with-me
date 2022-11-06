@@ -1,11 +1,13 @@
 package ru.practicum.explorewithme.stats;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class ViewStats {
 
-    private String app;
-    private String uri;
-    private Integer hits;
+    private final String app;
+    private final String uri;
+    private final Long hits;
 }
