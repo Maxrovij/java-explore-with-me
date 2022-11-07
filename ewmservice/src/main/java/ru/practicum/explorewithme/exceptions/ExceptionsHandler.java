@@ -80,6 +80,18 @@ public class ExceptionsHandler {
         );
     }
 
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ApiError handleRuntimeException(final RuntimeException e) {
+        return new ApiError(
+                HttpStatus.CONFLICT,
+                List.of(),
+                "Runtime exception!",
+                e.getMessage(),
+                LocalDateTime.now()
+        );
+    }
+
     private List<String> getErrors(List<FieldError> fieldErrors) {
         List<String> errors = new ArrayList<>();
         for (FieldError fieldError : fieldErrors) {
