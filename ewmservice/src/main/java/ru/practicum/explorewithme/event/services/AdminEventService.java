@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 @AllArgsConstructor
@@ -56,9 +55,7 @@ public class AdminEventService {
                                           LocalDateTime rangeEnd,
                                           int from,
                                           int size) {
-        List<Event> events = Stream.of(userIds)
-                .map(repository::findByInitiatorId)
-                .filter(Objects::nonNull)
+        List<Event> events = repository.findAllByInitiatorIdList(List.of(userIds)).stream()
                 .map(event -> EventFilter.filterByCatId(event, List.of(categories)))
                 .map(event -> EventFilter.filterByStates(event, List.of(states)))
                 .map(event -> EventFilter.filterByEndDate(event, rangeEnd))

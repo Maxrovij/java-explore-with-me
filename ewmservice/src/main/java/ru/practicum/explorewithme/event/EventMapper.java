@@ -17,7 +17,6 @@ import ru.practicum.explorewithme.users.model.UserShortDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -147,14 +146,7 @@ public class EventMapper {
 
     public List<Event> mapEventIdsToEventList(List<Long> ids) {
         if (ids == null || ids.isEmpty()) return List.of();
-        return ids.stream()
-                .map(id -> {
-                    Optional<Event> maybeEvent = eventRepository.findById(id);
-                    log.info("Maybe event is Present: " + maybeEvent.isPresent());
-                    return maybeEvent.orElse(null);
-                })
-                .filter(Objects::nonNull)
-                .collect(Collectors.toList());
+        return eventRepository.findAllById(ids);
     }
 
     public Event mapAdminRequestToEvent(Long eventId, AdminUpdateEventRequest eventRequest) {

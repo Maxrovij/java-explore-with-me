@@ -22,5 +22,6 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     @Query("update Event e set e.state = ?1 where e.id = ?2")
     void cancelEvent(EventState state, Long eventId);
 
-    Event findByInitiatorId(Long id);
+    @Query("select e from Event e where e.initiatorId in ?1")
+    List<Event> findAllByInitiatorIdList(List<Long> ids);
 }

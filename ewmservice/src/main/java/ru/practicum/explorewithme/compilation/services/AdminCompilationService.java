@@ -28,12 +28,7 @@ public class AdminCompilationService {
     private final CompilationMapper mapper;
 
     public CompilationDto postNew(NewCompilationDto newDto) {
-        log.info("NewCompilationDto: \n " +
-                "eventIds: " + newDto.getEvents());
         Compilation compilation = mapper.mapNewCompilationDtoToCompilation(newDto);
-        log.info("Compilation: \n" +
-                "id: " + compilation.getId() + "\n events: " +
-                "\n    " + Arrays.toString(compilation.getEvents().toArray()));
         return mapper.mapToDto(repository.save(compilation));
     }
 
