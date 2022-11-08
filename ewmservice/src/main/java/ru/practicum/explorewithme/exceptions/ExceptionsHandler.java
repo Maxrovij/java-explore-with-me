@@ -45,7 +45,7 @@ public class ExceptionsHandler {
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ApiError handleOperationForbiddenException(OperationForbiddenException e) {
         return new ApiError(
-                HttpStatus.CONFLICT,
+                HttpStatus.FORBIDDEN,
                 List.of(),
                 "Entity can not be changed!",
                 e.getMessage(),
