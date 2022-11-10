@@ -32,9 +32,10 @@ public class EventFilter {
         } else return event;
     }
 
-    public static Event filterByCatId(Event event, List<Long> catIds) {
+    public static Event filterByCatId(Event event, Long[] catIds) {
+        if (catIds == null) return event;
         if (event == null) return null;
-        if (catIds.contains(event.getCategoryId())) return event;
+        if (List.of(catIds).contains(event.getCategoryId())) return event;
         else return null;
     }
 
@@ -48,8 +49,10 @@ public class EventFilter {
         else return null;
     }
 
-    public static Event filterByStates(Event event, List<EventState> states) {
-        if (states.contains(event.getState())) return event;
+    public static Event filterByStates(Event event, EventState[] states) {
+        if (states == null) return event;
+        if (event == null) return null;
+        if (List.of(states).contains(event.getState())) return event;
         else return null;
     }
 }

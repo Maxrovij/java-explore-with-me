@@ -10,7 +10,6 @@ import ru.practicum.explorewithme.tools.EventFilter;
 import ru.practicum.explorewithme.tools.PageCreator;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -39,7 +38,7 @@ public class PublicEventService {
                 .stream()
                 .map(event -> EventFilter.filterByEndDate(event, rangeEnd))
                 .map(event -> EventFilter.filterByAvailable(event, onlyAvailable, mapper))
-                .map(event -> EventFilter.filterByCatId(event, Arrays.asList(categoryIds)))
+                .map(event -> EventFilter.filterByCatId(event, categoryIds))
                 .map(event -> EventFilter.filterByText(event, text))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
