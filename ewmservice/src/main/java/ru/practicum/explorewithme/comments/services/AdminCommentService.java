@@ -35,7 +35,7 @@ public class AdminCommentService {
     }
 
     public List<ResponseCommentDto> getByState(String state) {
-        return CommentMapper.mapListToDto(repository.getByState(state));
+        return CommentMapper.mapListToDto(repository.findAllByState(CommentState.valueOf(state)));
     }
 }
 
