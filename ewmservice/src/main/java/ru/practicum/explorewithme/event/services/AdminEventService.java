@@ -56,9 +56,12 @@ public class AdminEventService {
                                           int from,
                                           int size) {
         List<Event> events = repository.findAllByInitiatorIdList(List.of(userIds)).stream()
-                .map(event -> EventFilter.filterByCatId(event, List.of(categories)))
-                .map(event -> EventFilter.filterByStates(event, List.of(states)))
+                .map(event -> EventFilter.filterByCatId(event, categories))
+                .filter(Objects::nonNull)
+                .map(event -> EventFilter.filterByStates(event, states))
+                .filter(Objects::nonNull)
                 .map(event -> EventFilter.filterByEndDate(event, rangeEnd))
+                .filter(Objects::nonNull)
                 .map(event -> EventFilter.filterByStartDate(event, rangeStart))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());

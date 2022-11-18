@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 import ru.practicum.explorewithme.category.CategoryRepository;
 import ru.practicum.explorewithme.category.model.Category;
 import ru.practicum.explorewithme.category.model.CategoryDto;
+import ru.practicum.explorewithme.comments.CommentMapper;
+import ru.practicum.explorewithme.comments.CommentRepository;
+import ru.practicum.explorewithme.comments.model.Comment;
+import ru.practicum.explorewithme.comments.model.CommentState;
 import ru.practicum.explorewithme.event.model.*;
 import ru.practicum.explorewithme.exceptions.EntityNotFoundException;
 import ru.practicum.explorewithme.exceptions.OperationForbiddenException;
@@ -29,6 +33,8 @@ public class EventMapper {
     private final RequestRepository requestRepository;
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
+
+    private final CommentRepository commentRepository;
     private final EventClient client;
 
 
@@ -103,6 +109,10 @@ public class EventMapper {
         String uri = "/events/" + event.getId();
         Integer views = (Integer) client.getViews(uri);
         eventDto.setViews(views);
+
+        List<Comment> comments = commentRepository.findAllByEventId(event.getId()).stream()
+                .filter(comment -> (comment.getState() == CommentState.PUBLISHED)).collect(Collectors.toList());
+        eventDto.setComments(CommentMapper.mapListToDto(comments));
 
         return eventDto;
     }

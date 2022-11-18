@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.practicum.explorewithme.category.model.CategoryDto;
+import ru.practicum.explorewithme.comments.model.ResponseCommentDto;
 import ru.practicum.explorewithme.users.model.UserShortDto;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -37,4 +39,6 @@ public class EventFullDto {
     private EventState state;
 
     private int views;
+
+    private List<ResponseCommentDto> comments;
 }
